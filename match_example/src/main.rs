@@ -43,4 +43,19 @@ fn main() {
     let five = Some(5);
     let six = plus_one(five);
     let none = plus_one(None);
+    let coin = Coin::Quarter(UsState::Alaska);
+    let coin2 = Coin::Quarter(UsState::Alabama);
+
+    let mut count = 0;
+    match coin {
+        Coin::Quarter(state) => println!("state quarter from {:?}", state),
+        _ => count += 1,
+    }
+
+    // or we can use if let with else 
+    if let Coin::Quarter(state) = coin2 {
+        println!("state quarter from {:?}", state);
+    } else {
+        count += 1;
+    }
 }
