@@ -1,7 +1,6 @@
 // pig latin
 // convert strings to pig latin
 // "hello" => "ellohay"
-use std::io;
 
 fn piglatin(s: &str)  {
     let mut result = String::new();
@@ -20,13 +19,13 @@ fn piglatin(s: &str)  {
 }
 
 fn main() {
-    println!("Please enter a string.");
     // get user input
-    
+    println!("Please enter a string."); 
     // let s = String::new();
     let mut s = String::new();
-    io::stdin()
-        .read_line(&mut s)
-        .expect("failed to read input");
-    piglatin(&s);
+    std::io::stdin().read_line(&mut s).expect("input");
+    let words = s.trim().split(' ');
+    for word in words {
+        piglatin(word)
+    }
 }
