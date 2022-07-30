@@ -21,7 +21,6 @@ fn piglatin(s: &str)  {
 fn main() {
     // get user input
     println!("Please enter a string."); 
-    // let s = String::new();
     let mut s = String::new();
     std::io::stdin().read_line(&mut s).expect("input");
     let words = s.trim().split(' ');
