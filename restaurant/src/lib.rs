@@ -6,14 +6,13 @@ mod front_of_house {
     }
 
     mod serving {
-        fn take_order () {}
+        fn take_order() {}
 
-        fn serve_order () {}
+        fn serve_order() {}
 
         fn take_payment() {}
     }
 }
-
 
 pub fn eat_at_restaurant() {
     // Absolute path
@@ -29,7 +28,7 @@ pub fn eat_at_restaurant() {
     meal.toast = String::from("Wheat");
     println!("I'd like {} toast please", meal.toast);
 
-    // The next line won't compile if we uncomment it; we're not allowed 
+    // The next line won't compile if we uncomment it; we're not allowed
     // to see or modify the seasonal fruit that comes with the meal.
     // meal.seasonal_fruit = String::from("blueberries");
 
@@ -39,7 +38,7 @@ pub fn eat_at_restaurant() {
 
 fn deliver_order() {}
 
-mod back_of_house() {
+mod back_of_house {
     pub struct Breakfast {
         pub toast: String,
         seasonal_fruit: String,
@@ -66,7 +65,6 @@ mod back_of_house() {
 
     fn cook_order() {}
 }
-
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
