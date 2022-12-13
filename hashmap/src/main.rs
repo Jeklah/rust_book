@@ -11,7 +11,7 @@ fn main() {
     let score = scores.get(&team_name);
     let initial_scores = vec![10, 50];
 
-    // let mut scores: HashMap<_, _> = 
+    // let mut scores: HashMap<_, _> =
     //     teams.into_iter().zip(initial_scores.into_iter()).collect();
     let field_name = String::from("Favorite colour");
     let field_value = String::from("Blue");
