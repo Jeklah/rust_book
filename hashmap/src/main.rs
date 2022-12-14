@@ -16,6 +16,14 @@ fn main() {
     let field_name = String::from("Favorite colour");
     let field_value = String::from("Blue");
 
+    // When you want to change the data in a hash map, you have to decide how to
+    // handle the case when the key already has a value. You could replace the old
+    // value with the new value, completely disregarding the old value. You could
+    // keep the old value and ignore the new value. Or you could combine the two
+    // values into one new value. We’re going to look at how to do the last of
+    // these options, which is sometimes called combining, accumulating, or
+    // reducing.
+
     let mut map = HashMap::new();
     map.insert(field_name, field_value);
 
