@@ -5,42 +5,51 @@
 use std::collections::HashMap;
 use std::io;
 
-fn main() -> ! {
-    let mut company = HashMap::new();
+fn main() {
+    let mut company: HashMap<String, Vec<String>> = HashMap::new();
 
     loop {
         let mut input = String::new();
 
+        println!("Enter command: ");
         io::stdin()
             .read_line(&mut input)
             .expect("Failed to read line");
 
-        let mut input = input.split_whitespace();
+        let command: Vec<&str> = input.trim().split_whitespace().collect();
 
-        let command = input.next().unwrap();
-        let name = input.next().unwrap();
-        let department = input.next().unwrap();
+        match command[0] {
+            "Add" => {
+                let employee = command[1];
+                let department = command[3];
 
-        if command == "Add" {
-            company.entry(department).or_insert(Vec::new()).push(name);
-        } else if command == "List" {
-            if department == "All" {
-                for (dept, names) in &company {
-                    println!("{}:", dept);
-
-                    for name in names {
-                        println!("\t{}", name);
+                company
+                    .entry(department.to_string())
+                    .or_insert(Vec::new())
+                    .push(employee.to_string());
+            }
+            "List" => {
+                if command.len() == 3 {
+                    let department = command[2];
+                    if let Some(employees) = company.get(department) {
+                        for employee in employees {
+                            println!("{}", employee);
+                        }
+                    } else {
+                        println!("No employees found in department {}", department);
                     }
-                }
-            } else {
-                if let Some(names) = company.get(department) {
-                    println!("{}:", department);
+                } else {
+                    for (department, employees) in &company {
+                        println!("{}:", department);
 
-                    for name in names {
-                        println!("\t{}", name);
+                        for employee in employees {
+                            println!("{}", employee);
+                        }
                     }
                 }
             }
+            "Quit" => break,
+            _ => println!("Invalid command"),
         }
     }
 }
