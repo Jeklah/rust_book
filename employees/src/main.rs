@@ -21,7 +21,7 @@ fn main() {
         match command[0] {
             "Add" => {
                 let employee = command[1];
-                let department = command[3];
+                let department = command[2];
 
                 company
                     .entry(department.to_string())
