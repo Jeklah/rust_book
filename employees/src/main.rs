@@ -4,6 +4,15 @@
 
 use std::collections::HashMap;
 use std::io;
+use std::iter::Iterator;
+
+pub fn capitalise(s: &str) -> String {
+    let mut c = s.chars();
+    match c.next() {
+        None => String::new(),
+        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+    }
+}
 
 fn main() {
     let mut company: HashMap<String, Vec<String>> = HashMap::new();
@@ -16,7 +25,8 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read line");
 
-        let command: Vec<&str> = input.trim().split_whitespace().collect();
+        let mut command: Vec<&String> = input.trim().split_whitespace().collect();
+        let mut command = capitalise(command[0]);
 
         match command[0] {
             "Add" => {
