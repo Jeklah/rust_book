@@ -21,11 +21,9 @@ fn main() {
         let mut input = String::new();
 
         println!("Enter command: ");
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Failed to read line");
+        io::stdin().read_line(&mut input).unwrap();
 
-        let mut command: Vec<&String> = input.trim().split_whitespace().collect();
+        let mut command: Vec<&str> = input.trim().split_whitespace().collect();
         let mut command = capitalise(command[0]);
 
         match command[0] {
