@@ -23,7 +23,7 @@ fn main() {
         println!("Enter command: ");
         io::stdin().read_line(&mut input).unwrap();
 
-        let command: Vec<&str> = input.split(' ').collect();
+        let command: Vec<&str> = input.trim().split_whitespace().collect();
         let next_command: &str = &capitalise(command[0]);
 
         match next_command {
