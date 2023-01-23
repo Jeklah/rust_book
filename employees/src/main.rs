@@ -24,7 +24,7 @@ fn main() {
         io::stdin().read_line(&mut input).unwrap();
 
         let command: Vec<&str> = input.split(' ').collect();
-        let next_command: &str = command[0];
+        let next_command: &str = &capitalise(command[0]);
 
         match next_command {
             "Add" => {
