@@ -37,7 +37,6 @@ fn main() {
                     .push(employee.to_string());
             }
             "List" => {
-                println!("{}", command.len());
                 if command.len() == 3 {
                     let department = command[2];
                     if let Some(employees) = company.get(department) {
