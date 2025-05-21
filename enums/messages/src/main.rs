@@ -26,5 +26,13 @@ impl Message {
     }
 }
 
-// let m = Message::Write(String::from("hello"));
-// m.call();
+fn main() {
+    let m = Message::Move { x: 10, y: 20 };
+    m.call();
+
+    let m = Message::ChangeColor(255, 0, 0);
+    m.call();
+
+    let m = Message::Quit;
+    m.call();
+}
