@@ -24,4 +24,7 @@ fn main() {
         SpreadsheetCell::Text(String::from("blue")),
         SpreadsheetCell::Float(10.12),
     ];
+
+    let does_not_exist = &v[100];
+    let does_not_exist = v.get(100);
 }
