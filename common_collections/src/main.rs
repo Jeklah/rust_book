@@ -64,17 +64,17 @@ fn main() {
     let s = "initial contents".to_string();
     let s = String::from("initial contents");
 
-    let hello = String::from("السلام عليكم");
-    let hello = String::from("Dobrý den");
-    let hello = String::from("Hello");
-    let hello = String::from("שלום");
-    let hello = String::from("नमस्ते");
-    let hello = String::from("こんにちは");
-    let hello = String::from("안녕하세요");
-    let hello = String::from("你好");
-    let hello = String::from("Olá");
+    // let hello = String::from("السلام عليكم");
+    // let hello = String::from("Dobrý den");
+    // let hello = String::from("Hello");
+    // let hello = String::from("שלום");
+    // let hello = String::from("नमस्ते");
+    // let hello = String::from("こんにちは");
+    // let hello = String::from("안녕하세요");
+    // let hello = String::from("你好");
+    // let hello = String::from("Olá");
     let hello = String::from("Здравствуйте");
-    let hello = String::from("Hola");
+    // let hello = String::from("Hola");
 
     let mut s = String::from("foo");
     s.push_str("bar");
@@ -91,4 +91,38 @@ fn main() {
     let s1 = String::from("Hello, ");
     let s2 = String::from("world!");
     let s3 = s1 + &s2; // note s1 has been moved, while s2 is being borrowed/referenced
+    println!("{}", s3);
+
+    let str1 = String::from("tic");
+    let str2 = String::from("tac");
+    let str3 = String::from("toe");
+    let str = str1 + "-" + &str2 + "-" + &str3; // the maximum number of times a heap allocation
+    // could occur in this bit of code is 7. one for
+    // each call to String::from, and then 4 more for
+    // each concatenation.
+    println!("{}", str);
+
+    let strg1 = String::from("tic");
+    let strg2 = String::from("tac");
+    let strg3 = String::from("toe");
+    let strg = format!("{strg1}-{strg2}-{strg3}"); // format! returns a new String with the
+    // contents without taking ownership of any of
+    // the parameters
+    println!("{}", strg);
+
+    let s = &hello[0..4];
+    println!("{}", s);
+
+    // Iterating over strings
+    for c in "Здравствуйте".chars() {
+        println!("{}", c);
+    }
+
+    for c in hello.chars() {
+        println!("{}", c);
+    }
+
+    for c in hello.bytes() {
+        println!("{}", c);
+    }
 }
