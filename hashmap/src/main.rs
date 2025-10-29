@@ -8,7 +8,8 @@ fn main() {
 
     let teams = vec![String::from("Blue"), String::from("Yellow")];
     let team_name = String::from("Blue");
-    let score = scores.get(&team_name);
+    let score = scores.get(&team_name).copied().unwrap_or(0);
+    println!("The score of team {} is: {}", team_name, score);
     let initial_scores = vec![10, 50];
 
     // let mut scores: HashMap<_, _> =
@@ -28,8 +29,12 @@ fn main() {
     map.insert(field_name, field_value);
 
     scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Blue"), 25);
     scores.entry(String::from("Yellow")).or_insert(50);
     scores.entry(String::from("Blue")).or_insert(50);
+    scores.entry(String::from("Green")).or_insert(75);
+
+    println!("{scores:?}");
 
     for (key, value) in &scores {
         println!("{}: {}", key, value);
