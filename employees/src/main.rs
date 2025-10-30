@@ -17,30 +17,21 @@ pub fn capitalise(s: &str) -> String {
 
 fn main() {
     let mut company: HashMap<String, Vec<String>> = HashMap::new();
-
     loop {
         let mut input = String::new();
-
         println!("Enter command: ");
         io::stdin().read_line(&mut input).unwrap();
         let command_string: Vec<&str> = input.trim().split_whitespace().collect();
-        // println!("{:?}", command_string);
-        // println!("command_string length: {}", command_string.len());
         let first_command: &str = &capitalise(command_string[0]);
-        // println!("{}", first_command);
 
         match first_command {
             "Add" => {
                 let employee = command_string[1];
                 let department = command_string[3];
-
                 company
                     .entry(department.to_string())
                     .or_insert(Vec::new())
                     .push(employee.to_string());
-                // for (department, employees) in &company {
-                //     println!("{}: {:?}", department, employees);
-                // }
             }
             "List" => {
                 if command_string.len() == 2 {
