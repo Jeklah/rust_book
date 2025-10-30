@@ -8,10 +8,10 @@ use std::io;
 use std::iter::Iterator;
 
 pub fn capitalise(s: &str) -> String {
-    let mut c = s.chars();
-    match c.next() {
+    let mut chars = s.chars();
+    match chars.next() {
         None => String::new(),
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+        Some(first_char) => first_char.to_uppercase().collect::<String>() + chars.as_str(),
     }
 }
 
@@ -23,42 +23,52 @@ fn main() {
 
         println!("Enter command: ");
         io::stdin().read_line(&mut input).unwrap();
+        let command_string: Vec<&str> = input.trim().split_whitespace().collect();
+        // println!("{:?}", command_string);
+        // println!("command_string length: {}", command_string.len());
+        let first_command: &str = &capitalise(command_string[0]);
+        // println!("{}", first_command);
 
-        let command: Vec<&str> = input.trim().split_whitespace().collect();
-        let next_command: &str = &capitalise(command[0]);
-
-        match next_command {
+        match first_command {
             "Add" => {
-                let employee = command[1];
-                let department = command[2];
+                let employee = command_string[1];
+                let department = command_string[3];
 
                 company
                     .entry(department.to_string())
                     .or_insert(Vec::new())
                     .push(employee.to_string());
+                // for (department, employees) in &company {
+                //     println!("{}: {:?}", department, employees);
+                // }
             }
             "List" => {
-                if command.len() == 3 {
-                    let department = command[2];
+                if command_string.len() == 2 {
+                    let department = command_string[1];
+                    let print_department = capitalise(department);
                     if let Some(employees) = company.get(department) {
+                        println!("Employees in {}:", print_department);
                         for employee in employees {
-                            println!("{}", employee);
+                            let print_employee = capitalise(employee);
+                            println!("{}", print_employee);
                         }
                     } else {
                         println!("No employees found in department {}", department);
                     }
                 } else {
                     for (department, employees) in &company {
-                        println!("{}:", department);
+                        let print_department = capitalise(department);
+                        println!("Department: {}:", print_department);
 
                         for employee in employees {
-                            println!("{}", employee);
+                            let print_employee = capitalise(employee);
+                            println!("{}", print_employee);
                         }
                     }
                 }
             }
             "Quit" => break,
-            _ => println!("Invalid command"),
+            _ => println!("Invalid command. Please use 'Add', 'List', or 'Quit'."),
         }
     }
 }
