@@ -1,8 +1,8 @@
+use std::error::Error;
+use std::fs;
 use std::fs::File;
 use std::io::ErrorKind;
 use std::io::{self, Read};
-use std::fs;
-use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let v = vec![1, 2, 3];
@@ -23,7 +23,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
         },
     };
-    
+
     // same logic using closures, here |error|. | name | is the notation for closures
     let f2 = File::open("hello.txt").unwrap_or_else(|error| {
         if error.kind() == ErrorKind::NotFound {
@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 panic!("problem creating the file: {:?}", error);
             })
         } else {
-            panic!("problem opening the file: {:?}",error);
+            panic!("problem opening the file: {:?}", error);
         }
     });
 
@@ -40,17 +40,17 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 // propagating errors to the caller
 fn read_username_from_file() -> Result<String, io::Error> {
-    let f = File::open("hello.txt");
+    let username_file_result = File::open("hello.txt");
 
-    let mut f = match f {
+    let mut username_file_result = match username_file_result {
         Ok(file) => file,
         Err(e) => return Err(e),
     };
 
-    let mut s = String::new();
-    
-    match f.read_to_string(&mut s) {
-        Ok(_) => Ok(s),
+    let mut username = String::new();
+
+    match username_file_result.read_to_string(&mut username) {
+        Ok(_) => Ok(username),
         Err(e) => Err(e),
     }
 }
